@@ -1,1 +1,134 @@
-welcome!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronostic de football</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style= "color: blue;">
+   
+        <p>Version BETA ⚽: 
+Play Football betting for free and try to win scores 💵:
+</p>
+
+<span style= "background-color : green;">
+
+<p id="match" style= "background-color : gray;"></p>
+        <button id="btn1" onclick="checkResult('1')">1</button>
+        <button id="btnx" onclick="checkResult('x')">X</button>
+        <button id="btn2" onclick="checkResult('2')">2</button>
+</span>
+
+
+<section><center>
+
+<h3 id="counter" style="color: red;">0</h3><span style="color: Orange;"> Tap a pronostic to earn scores 💵</span>
+  <script>
+    // Fonction pour démarrer l'animation
+    function startCounter() {
+      var counter = 0;
+      var interval = setInterval(function() {
+        // Mettre à jour la valeur du compteur
+        document.getElementById("counter").textContent = counter;
+
+        // Augmenter le compteur
+        counter++;
+
+        // Arrêter l'animation une fois que le compteur atteint 1 000 000
+        if (counter > 1000000) {
+          clearInterval(interval);
+          startCounter();
+        }
+      }, 5);
+    }
+
+    // Démarrer l'animation après 1 seconde
+    setTimeout(startCounter, 1000);
+  </script></center>
+</section>
+
+<p> Statistic: </p>
+<p id="oldMatches"></p>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let teams = ['Liverpool', 'Chelsea', 'Manchester United', 'Arsenal', 'Tottenham', 'Manchester City'];
+
+        function generateMatch() {
+            let team1 = teams[Math.floor(Math.random() * teams.length)];
+            let team2 = teams[Math.floor(Math.random() * teams.length)];
+            let score1 = Math.floor(Math.random() * 5); // Score allant de 0 à 4
+            let score2 = Math.floor(Math.random() * 5);
+
+            document.getElementById('match').innerHTML = `${team1} (${score1}) vs ${team2} (${score2})`;
+        }
+
+        function generateOldMatches() {
+            let oldMatches = '';
+            for (let i = 0; i < 3; i++) {
+                let team1 = teams[Math.floor(Math.random() * teams.length)];
+                let team2 = teams[Math.floor(Math.random() * teams.length)];
+                let score1 = Math.floor(Math.random() * 5); // Score allant de 0 à 4
+                let score2 = Math.floor(Math.random() * 5);
+
+                oldMatches += `${team1} (${score1}) vs ${team2} (${score2})<br>`;
+            }
+
+            document.getElementById('oldMatches').innerHTML = oldMatches;
+        }
+
+        function checkResult(choice) {
+            generateMatch();
+            generateOldMatches();
+
+            let result = Math.floor(Math.random() * 3) + 1;
+            let winner = '';
+            let winningScore = 0;
+
+            if (result === 1) {
+                winner = team1;
+                winningScore = score1;
+            } else if (result === 2) {
+                winner = team2;
+                winningScore = score2;
+            } else {
+                winner = 'Match nul';
+            }
+
+            document.getElementById('result').innerHTML = `Équipe gagnante : ${winner} (${winningScore})`;
+
+            setTimeout(() => {
+                if (choice === '1' && result === 1) {
+                    window.location.href = 'https://ongpadi.org/preparation2/';
+                } else if (choice === 'x' && result === 2) {
+                    window.location.href = 'https://ongpadi.org/preparation2/';
+                } else if (choice === '2' && result === 3) {
+                    window.location.href = 'https://ongpadi.org/preparation2/';
+                } else {
+                    window.location.href = 'https://ongpadi.org/preparation1/';
+                }
+            }, 3000); // Affiche le résultat pendant 3 secondes avant de rediriger
+        }
+
+        generateMatch();
+        generateOldMatches();
+    </script>
+</body>
+
+</html>
